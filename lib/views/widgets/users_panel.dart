@@ -6,12 +6,14 @@ import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class UsersPanel extends StatelessWidget {
+  String userType;
+  UsersPanel({this.userType});
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MainPageViewModel>(
       builder: (context, child, model) {
         return FutureBuilder<List<Userdetail>>(
-          future: model.userdetails,
+          future: (userType =="All") ? model.allusers:model.superadminusers,
           builder: (_, AsyncSnapshot<List<Userdetail>> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -20,20 +22,20 @@ class UsersPanel extends StatelessWidget {
                 return Center(child: const CircularProgressIndicator());
               case ConnectionState.done:
                 if (snapshot.hasData) {
-                  var films = snapshot.data;
+                  var users = snapshot.data;
                   return ListView.builder(
-                    itemCount: films == null ? 0 : films.length,
+                    itemCount: users == null ? 0 : users.length,
                     itemBuilder: (_, int index) {
-                      var film = films[index];
-                      return UsersListItem(userdetail: film);
+                      var user = users[index];
+                      return UsersListItem(userdetail: user);
                     },
                   );
                 } else if (snapshot.hasError) {
                   return NoInternetConnection(
                     action: () async {
-                      await model.setUserdetails();
-                      await model.setUserdetails();
-                      await model.setUserdetails();
+                      await model.setSuperAdminUsers("SuperAdmin");
+                      await model.setAllUsers("All");
+                      //await model.setUserdetails();
                     },
                   );
                 }

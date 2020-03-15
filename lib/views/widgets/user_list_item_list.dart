@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kirthan/models/user.dart';
-import 'package:flutter_kirthan/utils/star_wars_styles.dart';
+import 'package:flutter_kirthan/utils/kirthan_styles.dart';
 
 class UsersListItem extends StatelessWidget {
   final Userdetail userdetail;
@@ -10,11 +10,11 @@ class UsersListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var title = Text(
-      userdetail?.userid,
+      userdetail?.userId,
       style: TextStyle(
-        color: StarWarsStyles.titleColor,
+        color: KirthanStyles.titleColor,
         fontWeight: FontWeight.bold,
-        fontSize: StarWarsStyles.titleFontSize,
+        fontSize: KirthanStyles.titleFontSize,
       ),
     );
 
@@ -22,15 +22,15 @@ class UsersListItem extends StatelessWidget {
       children: <Widget>[
         Icon(
           Icons.movie,
-          color: StarWarsStyles.subTitleColor,
-          size: StarWarsStyles.subTitleFontSize,
+          color: KirthanStyles.subTitleColor,
+          size: KirthanStyles.subTitleFontSize,
         ),
         Container(
           margin: const EdgeInsets.only(left: 4.0),
           child: Text(
-            userdetail?.username,
+            userdetail?.userName,
             style: TextStyle(
-              color: StarWarsStyles.subTitleColor,
+              color: KirthanStyles.subTitleColor,
             ),
           ),
         ),

@@ -39,86 +39,117 @@ class User {
 }
 
 class Userdetail {
-  int id;
-  String userid;
-  String username;
+  final int id;
+  String userId;
+  String userName;
   String password;
-  String usertype;
-  String firstname;
-  String lastname;
+  String userType;
+  String firstName;
+  String lastName;
   String email;
-  int phonenumber;
-  String addlineone;
-  String addlinetwo;
-  String addlinethree;
+  int phoneNumber;
+  String addLineOne;
+  String addLineTwo;
+  String addLineThree;
   String locality;
   String city;
-  int pincode;
+  int pinCode;
   String state;
   String country;
-  String govtidtype;
-  String govtid;
-  int isprocessed;
-  String createdby;
-  String updatedby;
-  String updatetime;
-  String approvalstatus;
-  String approvalcomments;
+  String govtIdType;
+  String govtId;
+  bool isProcessed;
+  String createdBy;
+  String createTime;
+  String updatedBy;
+  String updateTime;
+  String approvalStatus;
+  String approvalComments;
 
 
 //Typically called form service layer to create a new user
-  Userdetail({this.id, this.userid, this.username, this.password, this.usertype,
-    this.firstname,
-    this.lastname,
+  Userdetail({this.id, this.userId, this.userName, this.password, this.userType,
+    this.firstName,
+    this.lastName,
     this.email,
-    this.phonenumber,
-    this.addlineone,
-    this.addlinetwo,
-    this.addlinethree,
+    this.phoneNumber,
+    this.addLineOne,
+    this.addLineTwo,
+    this.addLineThree,
     this.locality,
     this.city,
-    this.pincode,
+    this.pinCode,
     this.state,
     this.country,
-    this.govtidtype,
-    this.govtid,
-    this.isprocessed,
-    this.createdby,
-    this.updatedby,
-    this.updatetime,
-    this.approvalstatus,
-    this.approvalcomments
-  });
+    this.govtIdType,
+    this.govtId,
+    this.isProcessed,
+    this.createdBy,
+    this.updatedBy,
+    this.updateTime,
+    this.approvalStatus,
+    this.approvalComments }
+  );
 //Typically called from the data_source layer after getting data from an external source.
-  Userdetail.fromMap(Map<String, dynamic> map) {
-
-    id = map['id'];
-    userid = map['userid'];
-    username = map['username'];
-    password= map['password'];
-    usertype= map['usertype'];
-    firstname=map['firstname'];
-    lastname=map['lastname'];
-    email=map['email'];
-    phonenumber=map['phonenumber'];
-    addlineone=map['addlineone'];
-    addlinetwo=map['addlinetwo'];
-    addlinethree=map['addlinethree'];
-    locality=map['locality'];
-    city=map['city'];
-    pincode=map['pincode'];
-    state=map['state'];
-    country=map['country'];
-    govtidtype=map['govtidtype'];
-    govtid=map['govtid'];
-    isprocessed=map['isprocessed'];
-    createdby=map['createdby'];
-    updatedby=map['updatedby'];
-    updatetime=map['updatetime'];
-    approvalstatus=map['approvalstatus'];
-    approvalcomments=map['approvalcomments'];
-
+  factory Userdetail.fromJson(Map<String, dynamic> data) {
+    return Userdetail( id: data['id'],
+      userId: data['userId'],
+      userName: data['userName'] ,
+      password: data['password'] ,
+      userType: data['userType'] ,
+      firstName: data['firstName'],
+      lastName: data['lastName'],
+      email: data['email'],
+      phoneNumber: data['phoneNumber'],
+      addLineOne: data['addLineOne'],
+      addLineTwo: data['addLineTwo'],
+      addLineThree: data['addLineThree'],
+      locality: data['locality'],
+      city: data['city'],
+      pinCode: data['pinCode'],
+      state: data['state'],
+      country: data['country'],
+      govtIdType: data['govtIdType'],
+      govtId: data['govtId'],
+      isProcessed: data['isProcessed'],
+      createdBy: data['createdBy'],
+      updatedBy: data['updatedBy'],
+      updateTime: data['updateTime'],
+      approvalStatus: data['approvalStatus'],
+      approvalComments: data['approvalComments'],
+    );
   }
+  factory Userdetail.fromMap(Map<String, dynamic> map) {
+  return Userdetail(
+    id: map['id'],
+    userId: map['userId'],
+    userName: map['userName'],
+    password: map['password'],
+    userType: map['userType'],
+    firstName: map['firstName'],
+    lastName: map['lastName'],
+    email: map['email'],
+    phoneNumber: map['phoneNumber'],
+    addLineOne: map['addLineOne'],
+    addLineTwo: map['addLineTwo'],
+    addLineThree: map['addLineThree'],
+    locality: map['locality'],
+    city: map['city'],
+    pinCode: map['pinCode'],
+    state: map['state'],
+    country: map['country'],
+    govtIdType: map['govtIdType'],
+    govtId: map['govtId'],
+    isProcessed: map['isProcessed'],
+    createdBy: map['createdBy'],
+    updatedBy: map['updatedBy'],
+    updateTime: map['updateTime'],
+    approvalStatus: map['approvalStatus'],
+    approvalComments: map['approvalComments'],
+  );
+  }
+
+  /*
 //Typically called from service or data_source layer just before persisting data.
   //Here is the appropriate place to check data validity before persistence.
   Map<String, dynamic> toJson() {
@@ -159,4 +190,6 @@ class Userdetail {
       throw NullNameException('Name cannot be Null');
     }
   }
+
+   */
 }

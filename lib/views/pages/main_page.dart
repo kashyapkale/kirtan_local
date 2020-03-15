@@ -18,15 +18,15 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   TabController tabController;
 
   Future loadData() async {
-    await widget.viewModel.setUserdetails();
-    await widget.viewModel.setUserdetails();
-    await widget.viewModel.setUserdetails();
+    await widget.viewModel.setSuperAdminUsers("SuperAdmin");
+    await widget.viewModel.setAllUsers("All");
+    //await widget.viewModel.setUserdetails();
   }
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(vsync: this, length: 3);
+    tabController = TabController(vsync: this, length: 2);
     loadData();
   }
 
@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Star Wars',
+          'User Management',
           style: TextStyle(
             fontFamily: 'Distant Galaxy',
           ),
@@ -44,11 +44,13 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         bottom: TabBar(
           controller: tabController,
           indicatorColor: Colors.white,
-          indicatorWeight: 3.0,
+          indicatorWeight: 2.0,
           tabs: <Widget>[
-            Tab(icon: Icon(FontAwesomeIcons.film)),
-            Tab(icon: Icon(FontAwesomeIcons.users)),
-            Tab(icon: Icon(FontAwesomeIcons.globeAmericas))
+            Tab(icon: Icon(Icons.supervisor_account),
+                child: const Text("Super Admin"),),
+            Tab(icon: Icon(FontAwesomeIcons.users),
+              child: const Text("Users"),),
+            //Tab(icon: Icon(FontAwesomeIcons.globeAmericas))
           ],
         ),
       ),
@@ -57,9 +59,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         child: TabBarView(
           controller: tabController,
           children: <Widget>[
-            UsersPanel(),
-            UsersPanel(),
-            UsersPanel(),
+            UsersPanel(userType: "SuperAdmin",),
+            UsersPanel(userType: "All",),
+            //UsersPanel(),
           ],
         ),
       ),
