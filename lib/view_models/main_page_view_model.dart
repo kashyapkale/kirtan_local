@@ -3,21 +3,29 @@ import 'package:meta/meta.dart';
 import 'package:flutter_kirthan/interfaces/i_restapi_svcs.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_kirthan/models/user.dart';
+import 'package:flutter_kirthan/models/event.dart';
 
 class MainPageViewModel extends Model {
-  Future<List<Userdetail>> _allusers;
-  Future<List<Userdetail>> _superadminusers;
+  Future<List<UserRequest>> _userrequests;
+  //Future<List<UserRequest>> _superadminusers;
+  Future<List<EventRequest>> _eventrequests;
 
-  Future<List<Userdetail>> get allusers => _allusers;
-  Future<List<Userdetail>> get superadminusers => _superadminusers;
+  Future<List<UserRequest>> get userrequests => _userrequests;
+  //Future<List<UserRequest>> get superadminusers => _superadminusers;
+  Future<List<EventRequest>> get eventrequests => _eventrequests;
 
-  set allusers(Future<List<Userdetail>> value) {
-    _allusers = value;
+  set userrequests(Future<List<UserRequest>> value) {
+    _userrequests = value;
     notifyListeners();
   }
 
-  set superadminusers(Future<List<Userdetail>> value) {
+  /*set superadminusers(Future<List<UserRequest>> value) {
     _superadminusers = value;
+    notifyListeners();
+  }*/
+
+  set eventrequests(Future<List<EventRequest>> value) {
+    _eventrequests = value;
     notifyListeners();
   }
 
@@ -27,16 +35,21 @@ class MainPageViewModel extends Model {
   MainPageViewModel({@required this.apiSvc});
 
 
-  Future<bool> setAllUsers(String userType) async {
-    allusers = apiSvc?.getUserDetails(userType);
+  Future<bool> setUserRequests(String userType) async {
+    userrequests = apiSvc?.getUserRequests(userType);
     //userdetails = apiSvc?.getDummyUserDetails();
-    return allusers != null;
+    return userrequests != null;
   }
 
-  Future<bool> setSuperAdminUsers(String userType) async {
-    superadminusers = apiSvc?.getUserDetails(userType);
-    //userdetails = apiSvc?.getDummyUserDetails();
+  /*
+  Future<bool> setSuperAdminUserRequests(String userType) async {
+    superadminusers = apiSvc?.getUserRequests(userType);
     return superadminusers != null;
+  }
+*/
+  Future<bool> setEventRequests(String eventType) async {
+    eventrequests = apiSvc?.getEventRequests(eventType);
+    return eventrequests != null;
   }
 
 }

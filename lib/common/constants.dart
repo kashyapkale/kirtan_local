@@ -28,7 +28,7 @@ const double spaceXL = 32.0;
 
 // Assets
 const String usersJsonPath = 'assets/data/user.json';
-const String userdetailsJsonPath = 'assets/data/userdetails.json';
+const String userdetailsJsonPath = 'assets/data/userrequests.json';
 const String markdownPath = 'assets/markdown/';
 
 // Routes

@@ -1,18 +1,18 @@
 import 'package:flutter_kirthan/exceptions/validation_exception.dart';
 
-class User {
-  int id;
-  String userid;
+class UserLogin {
+  //int id;
+  //String userid;
   String username;
   String password;
   String usertype;
 
 //Typically called form service layer to create a new user
-  User({this.id, this.userid, this.username, this.password, this.usertype});
+  UserLogin({this.username, this.password, this.usertype});
 //Typically called from the data_source layer after getting data from an external source.
-  User.fromJson(Map<String, dynamic> map) {
-    id = map['id'];
-    userid = map['userid'];
+  UserLogin.fromJson(Map<String, dynamic> map) {
+    //id = map['id'];
+    //userid = map['userid'];
     username = map['username'];
     password= map['password'];
     usertype= map['usertype'];
@@ -23,22 +23,24 @@ class User {
     //validate
     _validation();
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['userid'] = this.userid;
+    //data['id'] = this.id;
+    //data['userid'] = this.userid;
     data['username'] = this.username;
     data['password'] = this.password;
     data['usertype'] = this.usertype;
     return data;
   }
   _validation() {
-    if (userid == null) {
+    if (username == null) {
       //NullNameException is defined in the exception folder of the domain
       throw NullNameException('Name cannot be Null');
     }
   }
+
+
 }
 
-class Userdetail {
+class UserRequest {
   final int id;
   String userId;
   String userName;
@@ -68,7 +70,7 @@ class Userdetail {
 
 
 //Typically called form service layer to create a new user
-  Userdetail({this.id, this.userId, this.userName, this.password, this.userType,
+  UserRequest({this.id, this.userId, this.userName, this.password, this.userType,
     this.firstName,
     this.lastName,
     this.email,
@@ -91,8 +93,8 @@ class Userdetail {
     this.approvalComments }
   );
 //Typically called from the data_source layer after getting data from an external source.
-  factory Userdetail.fromJson(Map<String, dynamic> data) {
-    return Userdetail( id: data['id'],
+  factory UserRequest.fromJson(Map<String, dynamic> data) {
+    return UserRequest( id: data['id'],
       userId: data['userId'],
       userName: data['userName'] ,
       password: data['password'] ,
@@ -119,8 +121,8 @@ class Userdetail {
       approvalComments: data['approvalComments'],
     );
   }
-  factory Userdetail.fromMap(Map<String, dynamic> map) {
-  return Userdetail(
+  factory UserRequest.fromMap(Map<String, dynamic> map) {
+  return UserRequest(
     id: map['id'],
     userId: map['userId'],
     userName: map['userName'],

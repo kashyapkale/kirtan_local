@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_kirthan/view_models/main_page_view_model.dart';
-import 'package:flutter_kirthan/views/widgets/users_panel.dart';
+import 'package:flutter_kirthan/views/widgets/user/user_panel.dart';
+import 'package:flutter_kirthan/views/widgets/event/event_panel.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -18,9 +19,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   TabController tabController;
 
   Future loadData() async {
-    await widget.viewModel.setSuperAdminUsers("SuperAdmin");
-    await widget.viewModel.setAllUsers("All");
-    //await widget.viewModel.setUserdetails();
+    //await widget.viewModel.setSuperAdminUserRequests("SuperAdmin");
+    await widget.viewModel.setUserRequests("All");
+    await widget.viewModel.setEventRequests("All");
   }
 
   @override
@@ -36,7 +37,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'User Management',
+          'Request Approvals',
           style: TextStyle(
             fontFamily: 'Distant Galaxy',
           ),
@@ -46,11 +47,12 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           indicatorColor: Colors.white,
           indicatorWeight: 2.0,
           tabs: <Widget>[
-            Tab(icon: Icon(Icons.supervisor_account),
-                child: const Text("Super Admin"),),
+//            Tab(icon: Icon(Icons.supervisor_account),
+//                child: const Text("Super Admin"),),
             Tab(icon: Icon(FontAwesomeIcons.users),
               child: const Text("Users"),),
-            //Tab(icon: Icon(FontAwesomeIcons.globeAmericas))
+            Tab(icon: Icon(FontAwesomeIcons.globeAmericas),
+              child: const Text("Events"),),
           ],
         ),
       ),
@@ -59,9 +61,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         child: TabBarView(
           controller: tabController,
           children: <Widget>[
-            UsersPanel(userType: "SuperAdmin",),
+  //          UsersPanel(userType: "SuperAdmin",),
             UsersPanel(userType: "All",),
-            //UsersPanel(),
+            EventsPanel(eventType: "All",),
           ],
         ),
       ),

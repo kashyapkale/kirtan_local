@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_kirthan/common/constants.dart';
 import 'package:flutter_kirthan/models/user.dart';
+import 'package:flutter_kirthan/models/event.dart';
 import 'package:flutter_kirthan/interfaces/i_restapi_svcs.dart';
 
 class RestAPIServices implements IKirthanRestApi {
@@ -17,42 +18,46 @@ class RestAPIServices implements IKirthanRestApi {
   factory RestAPIServices() => _internal;
   RestAPIServices.internal();
 
-  Future<List<Userdetail>> getUserDetails(String userType) async {
-    String requestBody = "";
-    if (userType == "SuperAdmin" ) {
+  Future<List<UserRequest>> getUserRequests(String userType) async {
+    String requestBody = '{"locality":"Warje"}';
+
+    if (userType == "SA" ) {
       requestBody = '{"userType":"SuperAdmin"}';
-      //requestBody = '{"updatedby":"Manjunath"}';
     }
-    else if (userType == "All" ) {
-      requestBody = '{"locality":"Warje"}';
+    else if (userType == "A" ) {
+      requestBody = '{"userType":"Admin"}';
     }
+    else if (userType == "U" ) {
+      requestBody = '{"userType":""}';
+    }
+
     print(requestBody);
 
     var response = await _client.put('$_baseUrl/getuserrequests', headers: {"Content-Type": "application/json"}, body: requestBody);
 
     if (response.statusCode == 200) {
       //print(response.body);
-      List<dynamic> userdetailsData = json.decode(response.body);
+      List<dynamic> userrequestsData = json.decode(response.body);
       //print(userdetailsData);
-      List<Userdetail> userdetails = userdetailsData.map((userdetailsData) => Userdetail.fromMap(userdetailsData)).toList();
+      List<UserRequest> userrequests = userrequestsData.map((userrequestsData) => UserRequest.fromMap(userrequestsData)).toList();
 
       //print(userdetails);
 
-      return userdetails;
+      return userrequests;
 
     } else {
       throw Exception('Failed to get data');
     }
   }
 
-  Future<List<Userdetail>> getDummyUserDetails() async {
+  Future<List<UserRequest>> getDummyUserRequests() async {
     var response = await _client.get('$_baseUrl/getdummyuserrequest', headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
       //print(response.body);
       List<dynamic> userdetailsData = json.decode(response.body);
       //print(userdetailsData);
-      List<Userdetail> userdetails = userdetailsData.map((userdetailsData) => Userdetail.fromMap(userdetailsData)).toList();
+      List<UserRequest> userdetails = userdetailsData.map((userdetailsData) => UserRequest.fromMap(userdetailsData)).toList();
 
       return userdetails;
 
@@ -61,12 +66,58 @@ class RestAPIServices implements IKirthanRestApi {
     }
   }
 
-  Future<List<Userdetail>> getUserDetailsFromJson() async {
+  Future<List<UserRequest>> getUserRequestsFromJson() async {
     var userDetailsJson = await rootBundle.loadString(userdetailsJsonPath);
     List<dynamic> userdetailsData = json.decode(userDetailsJson) as List;
-    List<Userdetail> userdetails = userdetailsData.map((userdetailsData) => Userdetail.fromMap(userdetailsData)).toList();
+    List<UserRequest> userdetails = userdetailsData.map((userdetailsData) => UserRequest.fromMap(userdetailsData)).toList();
 
     return userdetails;
+  }
+
+  Future<List<EventRequest>> getEventRequests(String eventType) async {
+    print("I am in Service: getEventRequests");
+
+    String requestBody = '';
+
+    if(eventType == "1") {
+      requestBody = '{"eventId":"1"}';
+    }
+    else {
+      requestBody = '{"city":"Pune"}';
+    }
+
+    print(requestBody);
+
+    var response = await _client.put('$_baseUrl/geteventrequests', headers: {"Content-Type": "application/json"}, body: requestBody);
+
+    if (response.statusCode == 200) {
+      //print(response.body);
+      List<dynamic> eventrequestsData = json.decode(response.body);
+      //print(userdetailsData);
+      List<EventRequest> eventrequests = eventrequestsData.map((eventrequestsData) => EventRequest.fromMap(eventrequestsData)).toList();
+
+      //print(userdetails);
+
+      return eventrequests;
+
+    } else {
+      throw Exception('Failed to get data');
+    }
+  }
+
+  Future<EventRequest> submitNewEventREquest(EventRequest pEventrequest) async {
+    String requestBody = '';
+    var response = await _client.put('$_baseUrl/submitneweventrequest', headers: {"Content-Type": "application/json"}, body: requestBody);
+    if (response.statusCode == 200) {
+      EventRequest eventrequestsData = json.decode(response.body);
+      print(eventrequestsData);
+    }
+  }
+
+  Future<List<EventRequest>> getDummyEventRequests() async {
+
+    List<EventRequest> eventrequests;
+    return eventrequests;
   }
 
 

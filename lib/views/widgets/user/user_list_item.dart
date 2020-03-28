@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_kirthan/models/user.dart';
 import 'package:flutter_kirthan/utils/kirthan_styles.dart';
 
-class UsersListItem extends StatelessWidget {
-  final Userdetail userdetail;
+class UserRequestsListItem extends StatelessWidget {
+  final UserRequest userrequest;
 
-  UsersListItem({@required this.userdetail});
+  UserRequestsListItem({@required this.userrequest});
 
   @override
   Widget build(BuildContext context) {
     var title = Text(
-      userdetail?.userId,
+      userrequest?.userId,
       style: TextStyle(
         color: KirthanStyles.titleColor,
         fontWeight: FontWeight.bold,
@@ -28,7 +28,7 @@ class UsersListItem extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(left: 4.0),
           child: Text(
-            userdetail?.userName,
+            userrequest?.userName,
             style: TextStyle(
               color: KirthanStyles.subTitleColor,
             ),
