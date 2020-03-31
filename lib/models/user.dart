@@ -151,47 +151,40 @@ class UserRequest {
   );
   }
 
-  /*
+
 //Typically called from service or data_source layer just before persisting data.
   //Here is the appropriate place to check data validity before persistence.
   Map<String, dynamic> toJson() {
-    //validate
-    _validation();
+
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['userid'] = this.userid;
-    data['username'] = this.username;
+    data['userId'] = this.userId;
+    data['userName'] = this.userName;
     data['password'] = this.password;
-    data['usertype'] = this.usertype;
-    data['firstname']=this.firstname;
-    data['lastname']=this.lastname;
+    data['userType'] = this.userType;
+    data['firstName']=this.firstName;
+    data['lastName']=this.lastName;
     data['email']=this.email;
-    data['phonenumber']=this.phonenumber;
-    data['addlineone']=this.addlineone;
-    data['addlinetwo']=this.addlinetwo;
-    data['addlinethree']=this.addlinethree;
+    data['phoneNumber']=this.phoneNumber;
+    data['addLineOne']=this.addLineOne;
+    data['addLineTwo']=this.addLineTwo;
+    data['addLineThree']=this.addLineThree;
     data['locality']=this.locality;
     data['city']=this.city;
-    data['pincode']=this.pincode;
+    data['pinCode']=this.pinCode;
     data['state']=this.state;
     data['country']=this.country;
-    data['govtidtype']=this.govtidtype;
-    data['govtid']=this.govtid;
-    data['isprocessed']=this.isprocessed;
-    data['createdby']=this.createdby;
-    data['updatedby']=this.updatedby;
-    data['updatetime']=this.updatetime;
-    data['approvalstatus']=this.approvalstatus;
-    data['approvalcomments']=this.approvalcomments;
+    data['govtIdType']=this.govtIdType;
+    data['govtId']=this.govtId;
+    data['isProcessed']=this.isProcessed;
+    data['createdBy']=this.createdBy;
+    data['createTime']=this.createTime;
+    data['updatedBy']=this.updatedBy;
+    data['updateTime']=this.updateTime;
+    data['approvalStatus']=this.approvalStatus;
+    data['approvalComments']=this.approvalComments;
 
     return data;
   }
-  _validation() {
-    if (userid == null) {
-      //NullNameException is defined in the exception folder of the domain
-      throw NullNameException('Name cannot be Null');
-    }
-  }
 
-   */
 }

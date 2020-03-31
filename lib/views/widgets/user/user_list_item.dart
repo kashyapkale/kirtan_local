@@ -1,10 +1,13 @@
+//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_kirthan/models/user.dart';
 import 'package:flutter_kirthan/utils/kirthan_styles.dart';
+import 'package:flutter_kirthan/interfaces/i_restapi_svcs.dart';
+import 'package:flutter_kirthan/services/data_services.dart';
 
 class UserRequestsListItem extends StatelessWidget {
   final UserRequest userrequest;
-
+  final IKirthanRestApi apiSvc = new RestAPIServices();
   UserRequestsListItem({@required this.userrequest});
 
   @override
@@ -34,6 +37,21 @@ class UserRequestsListItem extends StatelessWidget {
             ),
           ),
         ),
+        Row(
+          children: <Widget>[
+            RaisedButton(
+                child: userrequest?.isProcessed? const Text("Processed"):const Text("Not Processed"),
+                onPressed: () {
+                  Map<String,dynamic> processrequestmap = new Map<String,dynamic>();
+                  processrequestmap["id"] = userrequest?.id;
+                  processrequestmap["approvalstatus"] = "Approved";
+                  processrequestmap["approvalcomments"] = "ApprovalComments";
+                  processrequestmap["usertype"] = userrequest?.userType;
+                  apiSvc?.processUserRequest(processrequestmap);
+                },
+            ),
+          ],
+        )
       ],
     );
 

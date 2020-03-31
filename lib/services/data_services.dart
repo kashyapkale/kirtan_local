@@ -50,6 +50,45 @@ class RestAPIServices implements IKirthanRestApi {
     }
   }
 
+  Future<UserRequest> submitNewUserRequest(Map<String,dynamic> userrequestmap) async {
+    print(userrequestmap);
+    String requestBody = json.encode(userrequestmap);
+    print(requestBody);
+
+    var response = await _client.put('$_baseUrl/submitnewuserrequest', headers: {"Content-Type": "application/json"}, body: requestBody);
+
+    if (response.statusCode == 200) {
+      //print(response.body);
+      UserRequest respuserrequest = json.decode(response.body);
+      print(respuserrequest);
+      //print(userdetailsData);
+      //List<UserRequest> userrequests = userrequestsData.map((userrequestsData) => UserRequest.fromMap(userrequestsData)).toList();
+
+      //print(userdetails);
+
+      return respuserrequest;
+
+    } else {
+      throw Exception('Failed to get data');
+    }
+  }
+  Future<bool> processUserRequest(Map<String,dynamic> processrequestmap) async {
+    print(processrequestmap);
+    String requestBody = json.encode(processrequestmap);
+    print(requestBody);
+
+    var response = await _client.put('$_baseUrl/processuserrequest', headers: {"Content-Type": "application/json"}, body: requestBody);
+
+    if (response.statusCode == 200) {
+      print(response.body);
+
+      return true;
+
+    } else {
+      throw Exception('Failed to get data');
+    }
+  }
+
   Future<List<UserRequest>> getDummyUserRequests() async {
     var response = await _client.get('$_baseUrl/getdummyuserrequest', headers: {"Content-Type": "application/json"});
 

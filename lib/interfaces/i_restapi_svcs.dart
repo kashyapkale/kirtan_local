@@ -9,6 +9,8 @@ abstract class IKirthanRestApi {
   //user
   Future<List<UserRequest>> getUserRequests(String userType);
   Future<List<UserRequest>> getDummyUserRequests();
+  Future<UserRequest> submitNewUserRequest(Map<String,dynamic> userrequestmap);
+  Future<bool> processUserRequest(Map<String,dynamic> processrequestmap);
 
   //event
   Future<List<EventRequest>> getEventRequests(String userType);
