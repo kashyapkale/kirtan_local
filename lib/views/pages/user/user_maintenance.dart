@@ -366,6 +366,7 @@ class _UserWriteState extends State<UserWrite> {
                           value: _selectedCountry,
                           icon: const Icon(Icons.location_city),
                           hint: Text('Select Country'),
+                          isExpanded: true ,
                           items: ['IND']
                               .map((country) => DropdownMenuItem(
                             value: country,
@@ -411,6 +412,7 @@ class _UserWriteState extends State<UserWrite> {
                           ),
                           TextFormField(
                             //attribute: "Govtid",
+
                             decoration: InputDecoration(
                               icon: const Icon(Icons.perm_identity),
                               labelText: "Govtid",
@@ -443,7 +445,7 @@ class _UserWriteState extends State<UserWrite> {
                       MaterialButton(
                         child: Text("Submit",style: TextStyle(color: Colors.white),),
                         color: Colors.blue,
-                        onPressed: () {
+                        onPressed: () async {
 
                           if (_formKey.currentState.validate()) {
                             _formKey.currentState.save();
@@ -460,7 +462,14 @@ class _UserWriteState extends State<UserWrite> {
                             //print(userrequest.city);
                             Map<String,dynamic> usermap = userrequest.toJson();
                             //print(usermap);
-                            apiSvc?.submitNewUserRequest(usermap);
+                            try {
+                               UserRequest newuserrequest  = await apiSvc?.submitNewUserRequest(usermap);
+                               print(newuserrequest.id);
+
+                            }
+                            catch(err) {
+                              print(err);
+                            }
                             }
                             //String s = jsonEncode(userrequest.mapToJson());
                             //service.registerUser(s);

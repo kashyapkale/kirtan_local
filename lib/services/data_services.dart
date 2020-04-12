@@ -58,7 +58,7 @@ class RestAPIServices implements IKirthanRestApi {
     var response = await _client.put('$_baseUrl/submitnewuserrequest', headers: {"Content-Type": "application/json"}, body: requestBody);
 
     if (response.statusCode == 200) {
-      //print(response.body);
+      print(response.body);
       UserRequest respuserrequest = json.decode(response.body);
       print(respuserrequest);
       //print(userdetailsData);

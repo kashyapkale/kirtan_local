@@ -5,7 +5,8 @@ import 'package:flutter_kirthan/views/widgets/user/user_list_item.dart';
 import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_kirthan/views/pages/user/user_maintenance.dart';
-import 'package:flutter_kirthan/views/pages/event/event_maintenance.dart';
+import 'package:flutter_kirthan/views/pages/user/user_maintenance.dart';
+import 'package:flutter_kirthan/views/pages/teamuser/userselection.dart';
 
 class UsersPanel extends StatelessWidget {
   String userType;
@@ -49,8 +50,11 @@ class UsersPanel extends StatelessWidget {
                           RaisedButton(
                             child: const Text("User"),
                             onPressed: () {
-                              print("Users");
-                              model.setUserRequests("U");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          UserSelection()));
                             },
                           ),
                           Expanded(

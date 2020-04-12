@@ -188,3 +188,21 @@ class UserRequest {
   }
 
 }
+
+class UserDetail {
+  String firstName;
+  String lastName;
+  String username;
+
+  UserDetail({this.firstName, this.lastName,this.username});
+
+  static List<UserDetail> getUsers() {
+    return <UserDetail>[
+      UserDetail(firstName: "Aaryan", lastName: "Shah", username: "Ashah"),
+      UserDetail(firstName: "Ben", lastName: "John" , username: "Ashah"),
+      UserDetail(firstName: "Carrie", lastName: "Brown", username: "Ashah"),
+      UserDetail(firstName: "Deep", lastName: "Sen", username: "Ashah"),
+      UserDetail(firstName: "Emily", lastName: "Jane", username: "Ashah"),
+    ];
+  }
+}
