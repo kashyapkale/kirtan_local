@@ -220,4 +220,6 @@ class UserRequest {
 
   }
 
+  static List<UserRequest> getUsers() {return null;}
+
 }
