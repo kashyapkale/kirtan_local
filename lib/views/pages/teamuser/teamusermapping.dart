@@ -3,7 +3,7 @@ import 'package:flutter_kirthan/models/user.dart';
 
 class TeamUserMapping extends StatefulWidget {
   TeamUserMapping({this.selectedUsers}) : super();
-  List<UserDetail> selectedUsers;
+  List<UserRequest> selectedUsers;
 
   final String title = "Team User Mapping";
 
@@ -14,7 +14,7 @@ class TeamUserMapping extends StatefulWidget {
 
 class _TeamUserMappingState extends State<TeamUserMapping> {
   final _formKey = GlobalKey<FormState>();
-  List<UserDetail> selectedUsers;
+  List<UserRequest> selectedUsers;
 
   _TeamUserMappingState({this.selectedUsers});
 

@@ -14,15 +14,15 @@ class UserSelection extends StatefulWidget {
 class _UserSelectionState extends State<UserSelection> {
   final _formKey = GlobalKey<FormState>();
 
-  List<UserDetail> users;
-  List<UserDetail> selectedUsers;
+  List<UserRequest> users;
+  List<UserRequest> selectedUsers;
   bool sort;
 
   @override
   void initState() {
     sort = false;
     selectedUsers = [];
-    users = UserDetail.getUsers();
+    users = UserRequest.getUsers();
     super.initState();
   }
 
@@ -36,7 +36,7 @@ class _UserSelectionState extends State<UserSelection> {
     }
   }
 
-  onSelectedRow(bool selected, UserDetail user) async {
+  onSelectedRow(bool selected, UserRequest user) async {
     setState(() {
       if (selected) {
         selectedUsers.add(user);
@@ -49,9 +49,9 @@ class _UserSelectionState extends State<UserSelection> {
   deleteSelected() async {
     setState(() {
       if (selectedUsers.isNotEmpty) {
-        List<UserDetail> temp = [];
+        List<UserRequest> temp = [];
         temp.addAll(selectedUsers);
-        for (UserDetail user in temp) {
+        for (UserRequest user in temp) {
           users.remove(user);
           selectedUsers.remove(user);
         }
@@ -103,7 +103,7 @@ class _UserSelectionState extends State<UserSelection> {
                       Text(user.lastName),
                     ),
                     DataCell(
-                      Text(user.username),
+                      Text(user.userName),
                     ),
                   ]),
             )
