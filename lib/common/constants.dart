@@ -34,3 +34,9 @@ const String markdownPath = 'assets/markdown/';
 // Routes
 const String initialRoute = '/';
 const String categoryRoute = '/category';
+
+//error messages
+const String successful = "Successfully";
+const String delete = "Deleted";
+const String process = "Processed";
+

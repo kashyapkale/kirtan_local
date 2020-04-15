@@ -29,32 +29,32 @@ class EventsPanel extends StatelessWidget {
                     //mainAxisAlignment: MainAxisAlignment.center,
                     //mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                     new Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                       children: <Widget>[
-                         RaisedButton(
-                           child: const Text("Today"),
-                           onPressed: () {print("Today"); model.setEventRequests("1");},
-                         ),
-                         RaisedButton(
-                           child: const Text("Tomorrow"),
-                           onPressed: null,
-                         ),
-                         RaisedButton(
-                           child: const Text("This Week"),
-                           onPressed: null,
-                         ),
-                         Expanded(
-                           child:
-                         RaisedButton(
-                           child: const Text("Create an Event"),
-                           onPressed: () {
-                             Navigator.push(context, MaterialPageRoute(builder: (context) => EventWrite(eventId: 1)));
-                           },
-                         ),
-                         ),
-                       ],
-                     ),
+                      new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          RaisedButton(
+                            child: const Text("Today"),
+                            onPressed: () {print("Today"); model.setEventRequests("1");},
+                          ),
+                          RaisedButton(
+                            child: const Text("Tomorrow"),
+                            onPressed: null,
+                          ),
+                          RaisedButton(
+                            child: const Text("This Week"),
+                            onPressed: null,
+                          ),
+                          Expanded(
+                            child:
+                            RaisedButton(
+                              child: const Text("Create an Event"),
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => EventWrite()));
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                       ListView.builder(
                         shrinkWrap: true,
                         itemCount: eventRequests == null ? 0 : eventRequests

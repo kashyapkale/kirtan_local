@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kirthan/models/user.dart';
+import 'package:flutter_kirthan/models/team.dart';
 import 'package:flutter_kirthan/view_models/main_page_view_model.dart';
-import 'package:flutter_kirthan/views/widgets/user/user_list_item.dart';
+import 'package:flutter_kirthan/views/widgets/team/team_list_item.dart';
 import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:flutter_kirthan/views/pages/user/user_maintenance.dart';
-import 'package:flutter_kirthan/views/pages/event/event_maintenance.dart';
+import 'package:flutter_kirthan/views/pages/team/team_maintenance.dart';
 
-class UsersPanel extends StatelessWidget {
-  String userType;
-  UsersPanel({this.userType});
+class TeamsPanel extends StatelessWidget {
+  String teamType;
+  TeamsPanel({this.teamType});
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MainPageViewModel>(
       builder: (context, child, model) {
-        return FutureBuilder<List<UserRequest>>(
-          future: model.userrequests,
-          builder: (_, AsyncSnapshot<List<UserRequest>> snapshot) {
+        return FutureBuilder<List<team>>(
+          future: model.teamrequests,
+          builder: (_, AsyncSnapshot<List<team>> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.active:
@@ -24,7 +23,7 @@ class UsersPanel extends StatelessWidget {
                 return Center(child: const CircularProgressIndicator());
               case ConnectionState.done:
                 if (snapshot.hasData) {
-                  var userRequests = snapshot.data;
+                  var teamRequests = snapshot.data;
                   return new Column(
                     //mainAxisAlignment: MainAxisAlignment.center,
                     //mainAxisSize: MainAxisSize.max,
@@ -33,12 +32,13 @@ class UsersPanel extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           RaisedButton(
-                            child: const Text("Super Admin"),
+                            child: const Text("All Teams"),
                             onPressed: () {
-                              print("Super Admin");
-                              model.setUserRequests("SA");
+                              print("All Teams");
+                              model.setTeamRequests("AE");
                             },
                           ),
+                          /*
                           RaisedButton(
                             child: const Text("Admin"),
                             onPressed: () {
@@ -52,16 +52,16 @@ class UsersPanel extends StatelessWidget {
                               print("Users");
                               model.setUserRequests("U");
                             },
-                          ),
+                          ),*/
                           Expanded(
                             child: RaisedButton(
-                              child: const Text("Create an User Request"),
+                              child: const Text("Create a Team"),
                               onPressed: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            UserWrite()));
+                                            TeamWrite()));
                               },
                             ),
                           ),
@@ -70,10 +70,10 @@ class UsersPanel extends StatelessWidget {
                       ListView.builder(
                         shrinkWrap: true,
                         itemCount:
-                        userRequests == null ? 0 : userRequests.length,
+                        teamRequests == null ? 0 : teamRequests.length,
                         itemBuilder: (_, int index) {
-                          var userrequest = userRequests[index];
-                          return UserRequestsListItem(userrequest: userrequest);
+                          var teamrequest = teamRequests[index];
+                          return TeamRequestsListItem(teamrequest: teamrequest);
                         },
                       ),
                     ],
@@ -81,9 +81,7 @@ class UsersPanel extends StatelessWidget {
                 } else if (snapshot.hasError) {
                   return NoInternetConnection(
                     action: () async {
-                      //await model.setSuperAdminUserRequests("SuperAdmin");
-                      await model.setUserRequests("All");
-                      //await model.setUserdetails();
+                      await model.setTeamRequests("All");
                     },
                   );
                 }

@@ -42,6 +42,7 @@ class EventRequest {
         this.isProcessed,
         this.createdBy,
         this.updatedBy,
+        this.createTime,
         this.updateTime,
         this.approvalStatus,
         this.approvalComments });
@@ -69,6 +70,7 @@ class EventRequest {
       createdBy: data['createdBy'],
       updatedBy: data['updatedBy'],
       updateTime: data['updateTime'],
+      createTime: data['createTime'],
       approvalStatus: data['approvalStatus'],
       approvalComments: data['approvalComments'],
     );
@@ -82,6 +84,7 @@ class EventRequest {
       eventDate: map['eventDate'],
       eventDuration: map['eventDuration'],
       eventLocation: map['eventLocation'],
+      eventType: map['eventType'],
       phoneNumber: map['phoneNumber'],
       addLineOne: map['addLineOne'],
       addLineTwo: map['addLineTwo'],
@@ -95,8 +98,70 @@ class EventRequest {
       createdBy: map['createdBy'],
       updatedBy: map['updatedBy'],
       updateTime: map['updateTime'],
+      createTime: map['createTime'],
       approvalStatus: map['approvalStatus'],
       approvalComments: map['approvalComments'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['eventId'] = this.eventId;
+    data['eventTitle'] = this.eventTitle;
+    data['eventDescription'] = this.eventDescription;
+    data['eventDate'] = this.eventDate;
+    data['eventDuration'] = this.eventDuration;
+    data['eventLocation'] = this.eventLocation;
+    data['eventType'] = this.eventType;
+    data['phoneNumber'] = this.phoneNumber;
+    data['addLineOne'] = this.addLineOne;
+    data['addLineTwo'] = this.addLineTwo;
+    data['addLineThree'] = this.addLineThree;
+    data['locality'] = this.locality;
+    data['city'] = this.city;
+    data['pinCode'] = this.pinCode;
+    data['state'] = this.state;
+    data['country'] = this.country;
+    data['isProcessed'] = this.isProcessed;
+    data['createdBy'] = this.createdBy;
+    data['updatedBy'] = this.updatedBy;
+    data['updateTime'] = this.updateTime;
+    data['createTime']=this.createTime;
+    data['approvalStatus'] = this.approvalStatus;
+    data['approvalComments'] = this.approvalComments;
+
+    return data;
+  }
+
+  Map toStrJson() {
+
+    return {
+      "eventId":this.eventId,
+      "eventTitle":this.eventTitle,
+      "eventDescription":this.eventDescription,
+      "eventDate":this.eventDate,
+      "eventDuration":this.eventDuration,
+      "eventLocation":this.eventLocation,
+      "eventType":this.eventType,
+      "phoneNumber":this.phoneNumber,
+      "addLineOne":this.addLineOne,
+      "addLineTwo":this.addLineTwo,
+      "addLineThree":this.addLineThree,
+      "locality":this.locality,
+      "city":this.city,
+      "pinCode":this.pinCode,
+      "state":this.state,
+      "country":this.country,
+      "isProcessed":this.isProcessed,
+      "createdBy":this.createdBy,
+      "updatedBy":this.updatedBy,
+      "updateTime":this.updateTime,
+      "createTime":this.createTime,
+      "approvalStatus":this.approvalStatus,
+      "approvalComments":this.approvalComments
+    };
+
+  }
+
 }

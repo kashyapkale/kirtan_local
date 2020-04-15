@@ -91,7 +91,7 @@ class UserRequest {
     this.updateTime,
     this.approvalStatus,
     this.approvalComments }
-  );
+      );
 //Typically called from the data_source layer after getting data from an external source.
   factory UserRequest.fromJson(Map<String, dynamic> data) {
     return UserRequest( id: data['id'],
@@ -122,33 +122,33 @@ class UserRequest {
     );
   }
   factory UserRequest.fromMap(Map<String, dynamic> map) {
-  return UserRequest(
-    id: map['id'],
-    userId: map['userId'],
-    userName: map['userName'],
-    password: map['password'],
-    userType: map['userType'],
-    firstName: map['firstName'],
-    lastName: map['lastName'],
-    email: map['email'],
-    phoneNumber: map['phoneNumber'],
-    addLineOne: map['addLineOne'],
-    addLineTwo: map['addLineTwo'],
-    addLineThree: map['addLineThree'],
-    locality: map['locality'],
-    city: map['city'],
-    pinCode: map['pinCode'],
-    state: map['state'],
-    country: map['country'],
-    govtIdType: map['govtIdType'],
-    govtId: map['govtId'],
-    isProcessed: map['isProcessed'],
-    createdBy: map['createdBy'],
-    updatedBy: map['updatedBy'],
-    updateTime: map['updateTime'],
-    approvalStatus: map['approvalStatus'],
-    approvalComments: map['approvalComments'],
-  );
+    return UserRequest(
+      id: map['id'],
+      userId: map['userId'],
+      userName: map['userName'],
+      password: map['password'],
+      userType: map['userType'],
+      firstName: map['firstName'],
+      lastName: map['lastName'],
+      email: map['email'],
+      phoneNumber: map['phoneNumber'],
+      addLineOne: map['addLineOne'],
+      addLineTwo: map['addLineTwo'],
+      addLineThree: map['addLineThree'],
+      locality: map['locality'],
+      city: map['city'],
+      pinCode: map['pinCode'],
+      state: map['state'],
+      country: map['country'],
+      govtIdType: map['govtIdType'],
+      govtId: map['govtId'],
+      isProcessed: map['isProcessed'],
+      createdBy: map['createdBy'],
+      updatedBy: map['updatedBy'],
+      updateTime: map['updateTime'],
+      approvalStatus: map['approvalStatus'],
+      approvalComments: map['approvalComments'],
+    );
   }
 
 
@@ -187,22 +187,37 @@ class UserRequest {
     return data;
   }
 
-}
+  Map toStrJson() {
 
-class UserDetail {
-  String firstName;
-  String lastName;
-  String username;
+    return {
+      "id":this.id,
+      "userId":this.userId,
+      "userName":this.userName,
+      "userType":this.userType,
+      "password":this.password,
+      "firstName":this.firstName,
+      "lastName":this.lastName,
+      "email":this.email,
+      "phoneNumber":this.phoneNumber,
+      "addLineOne":this.addLineOne,
+      "addLineTwo":this.addLineTwo,
+      "addLineThree":this.addLineThree,
+      "locality":this.locality,
+      "city":this.city,
+      "pinCode":this.pinCode,
+      "state":this.state,
+      "country":this.country,
+      "govtIdType":this.govtIdType,
+      "govtId":this.govtId,
+      "isProcessed":this.isProcessed,
+      "createdBy":this.createdBy,
+      "updatedBy":this.updatedBy,
+      "updateTime":this.updateTime,
+      "createTime":this.createTime,
+      "approvalStatus":this.approvalStatus,
+      "approvalComments":this.approvalComments
+    };
 
-  UserDetail({this.firstName, this.lastName,this.username});
-
-  static List<UserDetail> getUsers() {
-    return <UserDetail>[
-      UserDetail(firstName: "Aaryan", lastName: "Shah", username: "Ashah"),
-      UserDetail(firstName: "Ben", lastName: "John" , username: "Ashah"),
-      UserDetail(firstName: "Carrie", lastName: "Brown", username: "Ashah"),
-      UserDetail(firstName: "Deep", lastName: "Sen", username: "Ashah"),
-      UserDetail(firstName: "Emily", lastName: "Jane", username: "Ashah"),
-    ];
   }
+
 }

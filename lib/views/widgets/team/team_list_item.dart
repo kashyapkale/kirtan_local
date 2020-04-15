@@ -1,21 +1,22 @@
 //import 'dart:html';
 import 'package:flutter/material.dart';
-import 'package:flutter_kirthan/models/user.dart';
+import 'package:flutter_kirthan/models/team.dart';
 import 'package:flutter_kirthan/utils/kirthan_styles.dart';
 import 'package:flutter_kirthan/interfaces/i_restapi_svcs.dart';
 import 'package:flutter_kirthan/services/data_services.dart';
-import 'package:flutter_kirthan/views/widgets/user/view_user.dart';
+import 'package:flutter_kirthan/views/widgets/team/view_team.dart';
 import 'package:flutter_kirthan/common/constants.dart';
 
-class UserRequestsListItem extends StatelessWidget {
-  final UserRequest userrequest;
+
+class TeamRequestsListItem extends StatelessWidget {
+  final team teamrequest;
   final IKirthanRestApi apiSvc = new RestAPIServices();
-  UserRequestsListItem({@required this.userrequest});
+  TeamRequestsListItem({@required this.teamrequest});
 
   @override
   Widget build(BuildContext context) {
     var title = Text(
-      userrequest?.userId,
+      teamrequest?.teamTitle,
       style: TextStyle(
         color: KirthanStyles.titleColor,
         fontWeight: FontWeight.bold,
@@ -31,33 +32,38 @@ class UserRequestsListItem extends StatelessWidget {
           color: KirthanStyles.subTitleColor,
           size: KirthanStyles.subTitleFontSize,
         ),
-        Container(
+        /*Container(
           margin: const EdgeInsets.only(left: 4.0),
           child: Text(
-            userrequest?.userName,
+            teamrequest?.teamTitle,
             style: TextStyle(
               color: KirthanStyles.subTitleColor,
             ),
           ),
-        ),
+        ),*/
         Row(
           children: <Widget>[
-            RaisedButton(
-              child: userrequest.isProcessed? const Text("Processed"):const Text("Not Processed"),
-              onPressed: () {
-                Map<String,dynamic> processrequestmap = new Map<String,dynamic>();
-                processrequestmap["id"] = userrequest?.id;
-                processrequestmap["approvalstatus"] = "Approved";
-                processrequestmap["approvalcomments"] = "ApprovalComments";
-                processrequestmap["usertype"] = userrequest?.userType;
-                apiSvc?.processUserRequest(processrequestmap);
-                SnackBar mysnackbar = SnackBar (
-                  content: Text("User $process $successful "),
-                  duration: new Duration(seconds: 4),
-                  backgroundColor: Colors.green,
-                );
-                Scaffold.of(context).showSnackBar(mysnackbar);
-              },
+            SizedBox(
+              height: 35,
+              width: 65,
+
+              child: RaisedButton(
+                child: teamrequest.isProcessed? const Text("Processed"):const Text("Not Processed"),
+                onPressed: () {
+                  Map<String,dynamic> processrequestmap = new Map<String,dynamic>();
+                  processrequestmap["teamId"] = teamrequest?.teamId;
+                  processrequestmap["approvalstatus"] = "Approved";
+                  processrequestmap["approvalcomments"] = "ApprovalComments";
+
+                  apiSvc?.processTeamRequest(processrequestmap);
+                  SnackBar mysnackbar = SnackBar (
+                    content: Text("team $process "),
+                    duration: new Duration(seconds: 4),
+                    backgroundColor: Colors.green,
+                  );
+                  Scaffold.of(context).showSnackBar(mysnackbar);
+                },
+              ),
             ),
           ],
         ),
@@ -71,11 +77,11 @@ class UserRequestsListItem extends StatelessWidget {
               child: RaisedButton(
                 child: const Text("Delete"),
                 onPressed: () {
-                  Map<String,dynamic> processrequestmap = new Map<String,dynamic>();
-                  processrequestmap["id"] = userrequest?.id;
-                  apiSvc?.deleteUserRequest(processrequestmap);
+                  Map<String,dynamic> teamrequestmap = new Map<String,dynamic>();
+                  teamrequestmap["teamId"] = teamrequest?.teamId;
+                  apiSvc?.deleteTeamRequest(teamrequestmap);
                   SnackBar mysnackbar = SnackBar (
-                    content: Text("User $delete "),
+                    content: Text("team $delete "),
                     duration: new Duration(seconds: 4),
                     backgroundColor: Colors.red,
                   );
@@ -94,20 +100,17 @@ class UserRequestsListItem extends StatelessWidget {
               child: RaisedButton(
                 child: const Text("Edit"),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfileView(userrequest:userrequest)),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfileView(teamrequest: teamrequest)),);
+                  //updateEvent
                 },
               ),
             ),
           ],
         ),
 
+
       ],
     );
-
-
-
-
-
 
     return Column(
       children: <Widget>[
