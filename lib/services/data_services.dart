@@ -55,6 +55,7 @@ class RestAPIServices implements IKirthanRestApi {
     String requestBody = json.encode(userrequestmap);
     print(requestBody);
 
+
     var response = await _client.put('$_baseUrl/submitnewuserrequest', headers: {"Content-Type": "application/json"}, body: requestBody);
 
     if (response.statusCode == 200) {
@@ -90,6 +91,7 @@ class RestAPIServices implements IKirthanRestApi {
   }
 
   Future<List<UserRequest>> getDummyUserRequests() async {
+
     var response = await _client.get('$_baseUrl/getdummyuserrequest', headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
@@ -146,6 +148,7 @@ class RestAPIServices implements IKirthanRestApi {
 
   Future<EventRequest> submitNewEventREquest(EventRequest pEventrequest) async {
     String requestBody = '';
+    print(requestBody);
     var response = await _client.put('$_baseUrl/submitneweventrequest', headers: {"Content-Type": "application/json"}, body: requestBody);
     if (response.statusCode == 200) {
       EventRequest eventrequestsData = json.decode(response.body);
