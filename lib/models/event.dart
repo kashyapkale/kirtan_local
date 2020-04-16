@@ -1,6 +1,6 @@
 
 class EventRequest {
-  final int eventId;
+  final int id;
   String eventTitle;
   String eventDescription;
   String eventDate;
@@ -27,7 +27,7 @@ class EventRequest {
 
 //Typically called form service layer to create a new user
   EventRequest(
-      {this.eventId, this.eventTitle, this.eventDescription, this.eventDate, this.eventDuration,
+      {this.id, this.eventTitle, this.eventDescription, this.eventDate, this.eventDuration,
         this.eventLocation,
         this.eventType,
         this.phoneNumber,
@@ -50,7 +50,7 @@ class EventRequest {
 //Typically called from the data_source layer after getting data from an external source.
   factory EventRequest.fromJson(Map<String, dynamic> data) {
     return EventRequest(
-      eventId: data['eventId'],
+      id: data['id'],
       eventTitle: data['eventTitle'],
       eventDescription: data['eventDescription'],
       eventDate: data['eventDate'],
@@ -78,7 +78,7 @@ class EventRequest {
 
   factory EventRequest.fromMap(Map<String, dynamic> map) {
     return EventRequest(
-      eventId: map['eventId'],
+      id: map['id'],
       eventTitle: map['eventTitle'],
       eventDescription: map['eventDescription'],
       eventDate: map['eventDate'],
@@ -107,7 +107,7 @@ class EventRequest {
   Map<String, dynamic> toJson() {
 
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['eventId'] = this.eventId;
+    data['id'] = this.id;
     data['eventTitle'] = this.eventTitle;
     data['eventDescription'] = this.eventDescription;
     data['eventDate'] = this.eventDate;
@@ -137,7 +137,7 @@ class EventRequest {
   Map toStrJson() {
 
     return {
-      "eventId":this.eventId,
+      "id":this.id,
       "eventTitle":this.eventTitle,
       "eventDescription":this.eventDescription,
       "eventDate":this.eventDate,

@@ -1,6 +1,6 @@
 
 class team {
-  final int teamId;
+  final int id;
   String teamTitle;
   String teamDescription;
   bool isProcessed;
@@ -13,7 +13,7 @@ class team {
 
 
 //Typically called form service layer to create a new user
-  team({this.teamId, this.teamTitle, this.teamDescription, this.isProcessed,
+  team({this.id, this.teamTitle, this.teamDescription, this.isProcessed,
     this.createdBy,
     this.updatedBy,
     this.createTime,
@@ -24,7 +24,7 @@ class team {
 //Typically called from the data_source layer after getting data from an external source.
   factory team.fromJson(Map<String, dynamic> data) {
     return team(
-      teamId: data['teamId'],
+      id: data['id'],
       teamTitle: data['teamTitle'],
       teamDescription: data['teamDescription'],
       isProcessed: data['isProcessed'],
@@ -39,7 +39,7 @@ class team {
 
   factory team.fromMap(Map<String, dynamic> map) {
     return team(
-      teamId: map['teamId'],
+      id: map['id'],
       teamTitle: map['teamTitle'],
       teamDescription: map['teamDescription'],
       isProcessed: map['isProcessed'],
@@ -54,7 +54,7 @@ class team {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['teamId'] = this.teamId;
+    data['id'] = this.id;
     data['teamTitle'] = this.teamTitle;
     data['teamDescription'] = this.teamDescription;
     data['isProcessed'] = this.isProcessed;
@@ -70,7 +70,7 @@ class team {
 
   Map toStrJson() {
     return {
-      "teamId": this.teamId,
+      "id": this.id,
 
       "teamDescription": this.teamDescription,
 

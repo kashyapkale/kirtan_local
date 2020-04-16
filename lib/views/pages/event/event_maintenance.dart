@@ -99,7 +99,7 @@ class _EventWriteState extends State<EventWrite> {
                             labelText:"eventID"
                         ),
                         onSaved: (input){
-                          eventrequest.eventId = input;
+                          eventrequest.id = input;
                         },
                         validator: (value) {
                           if(value.isEmpty) {
@@ -495,8 +495,8 @@ class _EventWriteState extends State<EventWrite> {
                                 eventrequest.approvalComments = "AAA";
                                 Map<String,dynamic> eventmap = eventrequest.toJson();
                                 EventRequest neweventrequest =await apiSvc?.submitNewEventRequest(eventmap);
-                                print(neweventrequest.eventId);
-                                String uid = neweventrequest.eventId.toString();
+                                print(neweventrequest.id);
+                                String uid = neweventrequest.id.toString();
                                 SnackBar mysnackbar = SnackBar (
                                   content: Text("Event registered $successful "),
                                   duration: new Duration(seconds: 4),

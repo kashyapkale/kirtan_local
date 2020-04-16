@@ -122,8 +122,8 @@ class _TeamWriteState extends State<TeamWrite> {
                                     .toJson();
                                 team newteamrequest = await apiSvc
                                     ?.submitNewTeamRequest(teammap);
-                                print(newteamrequest.teamId);
-                                String tid = newteamrequest.teamId.toString();
+                                print(newteamrequest.id);
+                                String tid = newteamrequest.id.toString();
                                 SnackBar mysnackbar = SnackBar(
                                   content: Text(
                                       "Team registered $successful with $tid"),

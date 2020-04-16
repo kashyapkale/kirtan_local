@@ -155,7 +155,7 @@ class RestAPIServices implements IKirthanRestApi {
     String requestBody = '';
 
     if(eventType == "bmg") {
-      requestBody = '{"eventId":"4"}';
+      requestBody = '{"id":"4"}';
     }
     else {
       requestBody = '{"city":"Pune"}';

@@ -54,7 +54,7 @@ class EventRequestsListItem extends StatelessWidget {
                 child: eventrequest.isProcessed? const Text("Processed"):const Text("Not Processed"),
                 onPressed: () {
                   Map<String,dynamic> processrequestmap = new Map<String,dynamic>();
-                  processrequestmap["eventId"] = eventrequest?.eventId;
+                  processrequestmap["id"] = eventrequest?.id;
                   processrequestmap["approvalstatus"] = "Approved";
                   processrequestmap["approvalcomments"] = "ApprovalComments";
                   processrequestmap["eventType"] = eventrequest?.eventType;
@@ -80,7 +80,7 @@ class EventRequestsListItem extends StatelessWidget {
                 child: const Text("Delete"),
                 onPressed: () {
                   Map<String,dynamic> processrequestmap = new Map<String,dynamic>();
-                  processrequestmap["eventId"] = eventrequest?.eventId;
+                  processrequestmap["id"] = eventrequest?.id;
                   apiSvc?.deleteEventRequest(processrequestmap);
                   SnackBar mysnackbar = SnackBar (
                     content: Text("Event $delete "),

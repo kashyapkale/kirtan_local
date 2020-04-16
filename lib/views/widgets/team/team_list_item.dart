@@ -51,7 +51,7 @@ class TeamRequestsListItem extends StatelessWidget {
                 child: teamrequest.isProcessed? const Text("Processed"):const Text("Not Processed"),
                 onPressed: () {
                   Map<String,dynamic> processrequestmap = new Map<String,dynamic>();
-                  processrequestmap["teamId"] = teamrequest?.teamId;
+                  processrequestmap["id"] = teamrequest?.id;
                   processrequestmap["approvalstatus"] = "Approved";
                   processrequestmap["approvalcomments"] = "ApprovalComments";
 
@@ -78,7 +78,7 @@ class TeamRequestsListItem extends StatelessWidget {
                 child: const Text("Delete"),
                 onPressed: () {
                   Map<String,dynamic> teamrequestmap = new Map<String,dynamic>();
-                  teamrequestmap["teamId"] = teamrequest?.teamId;
+                  teamrequestmap["id"] = teamrequest?.id;
                   apiSvc?.deleteTeamRequest(teamrequestmap);
                   SnackBar mysnackbar = SnackBar (
                     content: Text("team $delete "),
