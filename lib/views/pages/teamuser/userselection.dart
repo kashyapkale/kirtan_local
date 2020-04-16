@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kirthan/models/user.dart';
 import 'package:flutter_kirthan/views/pages/teamuser/teamusermapping.dart';
+import 'package:flutter_kirthan/interfaces/i_restapi_svcs.dart';
+import 'package:flutter_kirthan/services/data_services.dart';
 
 class UserSelection extends StatefulWidget {
   UserSelection({Key key}) : super(key: key);
@@ -13,16 +15,27 @@ class UserSelection extends StatefulWidget {
 
 class _UserSelectionState extends State<UserSelection> {
   final _formKey = GlobalKey<FormState>();
-
+  final IKirthanRestApi apiSvc = new RestAPIServices();
   List<UserRequest> users;
   List<UserRequest> selectedUsers;
   bool sort;
+
+  void getUsers() async{
+    users = await apiSvc?.getUserRequests("SA");
+    print("Users");
+    print(users);
+  }
 
   @override
   void initState() {
     sort = false;
     selectedUsers = [];
-    users = UserRequest.getUsers();
+
+    //apiSvc?.getUserRequests("SA").whenComplete(action)
+    
+    getUsers();
+    //users = UserRequest.getUsers();
+
     super.initState();
   }
 

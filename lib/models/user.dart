@@ -220,6 +220,22 @@ class UserRequest {
 
   }
 
-  static List<UserRequest> getUsers() {return null;}
+}
 
+class UserDetail {
+    String firstname;
+    String lastname;
+    String username;
+
+    UserDetail({this.firstname, this.lastname, this.username});
+
+    static List<UserDetail> getUsers() {
+      List<UserDetail> users = List<UserDetail>();
+      users.add(UserDetail(firstname: "Manjunath",lastname: "Bijinepalli",username: "manjunath_biji"));
+      users.add(UserDetail(firstname: "Kashyap",lastname: "Kale",username: "kashyap.kale"));
+      users.add(UserDetail(firstname: "Janice",lastname: "M",username: "janice.m"));
+      users.add(UserDetail(firstname: "Anuj",lastname: "Kakde",username: "anuj.kakde"));
+
+      return users;
+    }
 }
