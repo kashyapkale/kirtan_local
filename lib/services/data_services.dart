@@ -11,7 +11,8 @@ import 'package:flutter_kirthan/interfaces/i_restapi_svcs.dart';
 
 class RestAPIServices implements IKirthanRestApi {
   //final _baseUrl = 'http://10.0.2.2:8080';
-  final _baseUrl = 'http://192.168.1.7:8080';
+  final _baseUrl = 'http://192.168.1.8:8080'; //Manju
+  //final _baseUrl = 'http://192.168.1.7:8080'; // Janice
   http.Client _client = http.Client();
 
   set client(http.Client value) => _client = value;

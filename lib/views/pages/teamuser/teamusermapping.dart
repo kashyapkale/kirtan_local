@@ -18,12 +18,12 @@ class _TeamUserMappingState extends State<TeamUserMapping> {
 
   _TeamUserMappingState({this.selectedUsers});
 
-  List<String> _teams = ['Adilabad',
-    'Anantapur',
-    'Chittoor',
-    'Kakinada',
-    'Guntur',
-    'Hyderabad'];
+  List<String> _teams = ['Team-1',
+    'Team-2',
+    'Team-3',
+    'Team-4',
+    'Team-5',
+    'Team-6'];
   String _selectedTeam;
 
   @override
