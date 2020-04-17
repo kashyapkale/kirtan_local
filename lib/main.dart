@@ -4,7 +4,7 @@ import 'package:flutter_kirthan/view_models/main_page_view_model.dart';
 import 'package:flutter_kirthan/views/pages/main_page.dart';
 
 final MainPageViewModel mainPageVM = MainPageViewModel(apiSvc: RestAPIServices());
-
+//updated by anuj machine
 void main() => runApp(KirthanApp(mainPageVM: mainPageVM));
 
 class KirthanApp extends StatelessWidget {
