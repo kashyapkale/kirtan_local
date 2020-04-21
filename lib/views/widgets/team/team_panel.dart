@@ -13,9 +13,9 @@ class TeamsPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MainPageViewModel>(
       builder: (context, child, model) {
-        return FutureBuilder<List<team>>(
+        return FutureBuilder<List<TeamRequest>>(
           future: model.teamrequests,
-          builder: (_, AsyncSnapshot<List<team>> snapshot) {
+          builder: (_, AsyncSnapshot<List<TeamRequest>> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.active:

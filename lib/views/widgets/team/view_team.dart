@@ -8,7 +8,7 @@ import 'package:flutter_kirthan/interfaces/i_restapi_svcs.dart';
 
 
 class EditProfileView extends StatefulWidget {
-  team teamrequest ;
+  TeamRequest teamrequest ;
 
   EditProfileView({Key key, @required this.teamrequest}) : super(key: key);
 
@@ -18,7 +18,7 @@ class EditProfileView extends StatefulWidget {
 
 class _EditProfileViewState extends State<EditProfileView> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  team teamrequest= new team();
+  TeamRequest teamrequest= new TeamRequest();
   final IKirthanRestApi apiSvc = new RestAPIServices();
 
 

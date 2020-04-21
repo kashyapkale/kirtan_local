@@ -10,12 +10,12 @@ import 'package:flutter_kirthan/models/team.dart';
 class MainPageViewModel extends Model {
   Future<List<UserRequest>> _userrequests;
   Future<List<EventRequest>> _eventrequests;
-  Future<List<team>> _teamrequests;
+  Future<List<TeamRequest>> _teamrequests;
 
 
   Future<List<UserRequest>> get userrequests => _userrequests;
   Future<List<EventRequest>> get eventrequests => _eventrequests;
-  Future<List<team>> get teamrequests => _teamrequests;
+  Future<List<TeamRequest>> get teamrequests => _teamrequests;
 
 
   set userrequests(Future<List<UserRequest>> value) {
@@ -30,7 +30,7 @@ class MainPageViewModel extends Model {
     notifyListeners();
   }
 
-  set teamrequests(Future<List<team>> value) {
+  set teamrequests(Future<List<TeamRequest>> value) {
     _teamrequests = value;
     notifyListeners();
   }

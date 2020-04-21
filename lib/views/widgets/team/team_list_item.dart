@@ -9,7 +9,7 @@ import 'package:flutter_kirthan/common/constants.dart';
 
 
 class TeamRequestsListItem extends StatelessWidget {
-  final team teamrequest;
+  final TeamRequest teamrequest;
   final IKirthanRestApi apiSvc = new RestAPIServices();
   TeamRequestsListItem({@required this.teamrequest});
 

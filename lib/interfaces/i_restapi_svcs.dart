@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter_kirthan/models/teamuser.dart';
 import 'package:flutter_kirthan/models/user.dart';
 import 'package:flutter_kirthan/models/event.dart';
 import 'package:flutter_kirthan/models/team.dart';
@@ -26,10 +27,17 @@ abstract class IKirthanRestApi {
   Future<void> submitUpdateEventRequest(String eventrequestmap);
 
   //team
-  Future<List<team>> getTeamRequests(String teamTitle);
-  Future<team> submitNewTeamRequest(Map<String,dynamic> teamrequestmap);
+  Future<List<TeamRequest>> getTeamRequests(String teamTitle);
+  Future<TeamRequest> submitNewTeamRequest(Map<String,dynamic> teamrequestmap);
   Future<void> submitUpdateTeamRequest(String teamrequestmap);
-  //Future<List<EventRequest>> getDummyEventRequests();
   Future<bool> processTeamRequest(Map<String,dynamic> processrequestmap);
   Future<bool> deleteTeamRequest(Map<String,dynamic> processrequestmap);
+
+
+  //TeamUserMapping
+  //Future<List<TeamRequest>> getTeamRequests(String teamTitle);
+  Future<List<TeamUser>> submitNewTeamUserMapping(List<TeamUser> listofteamusermap);
+  //Future<void> submitUpdateTeamRequest(String teamrequestmap);
+  //Future<bool> processTeamRequest(Map<String,dynamic> processrequestmap);
+  //Future<bool> deleteTeamRequest(Map<String,dynamic> processrequestmap);
 }

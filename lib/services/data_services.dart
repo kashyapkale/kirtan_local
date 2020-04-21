@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_kirthan/models/teamuser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_kirthan/common/constants.dart';
@@ -289,7 +290,7 @@ class RestAPIServices implements IKirthanRestApi {
   }
 
 
-  Future<team> submitNewTeamRequest(Map<String,dynamic> eventrequestmap) async {
+  Future<TeamRequest> submitNewTeamRequest(Map<String,dynamic> eventrequestmap) async {
     print(eventrequestmap);
     String requestBody = json.encode(eventrequestmap);
     print(requestBody);
@@ -302,7 +303,7 @@ class RestAPIServices implements IKirthanRestApi {
       //return respteamrequest;
 
       Map<String, dynamic> teamrequestsData = json.decode(response.body);
-      team teamrequests = team.fromMap(teamrequestsData);
+      TeamRequest teamrequests = TeamRequest.fromMap(teamrequestsData);
       print(teamrequests);
       return teamrequests;
 
@@ -329,7 +330,7 @@ class RestAPIServices implements IKirthanRestApi {
     }
   }
 
-  Future<List<team>> getTeamRequests(String teamTitle) async {
+  Future<List<TeamRequest>> getTeamRequests(String teamTitle) async {
     String requestBody = '{"approvalStatus":"approved"}';
 
     //if (teamType == "AE" ) {
@@ -345,9 +346,9 @@ class RestAPIServices implements IKirthanRestApi {
     if (response.statusCode == 200) {
       //print(response.body);
       List<dynamic> teamrequestsData = json.decode(response.body);
-      //print(userdetailsData);
-      List<team> teamrequests = teamrequestsData.map((teamrequestsData) => team.fromMap(teamrequestsData)).toList();
-
+      print(teamrequestsData);
+      List<TeamRequest> teamrequests = teamrequestsData.map((teamrequestsData) => TeamRequest.fromMap(teamrequestsData)).toList();
+      print(teamrequests);
       //print(userdetails);
 
       return teamrequests;
@@ -374,6 +375,30 @@ class RestAPIServices implements IKirthanRestApi {
     }
 
 
+  }
+
+  Future<List<TeamUser>> submitNewTeamUserMapping(List<TeamUser> listofteamusermap) async {
+    print(listofteamusermap);
+    String requestBody = json.encode(listofteamusermap);
+    print(requestBody);
+
+    var response = await _client.put('$_baseUrl/submitnewteamusermapping', headers: {"Content-Type": "application/json"}, body: requestBody);
+
+    if (response.statusCode == 200) {
+      List<dynamic> teamusermappingData = json.decode(response.body);
+      List<TeamUser> teamrequests = teamusermappingData.map((teamusermappingData) =>  TeamUser.fromMap(teamusermappingData)).toList();
+//      TeamUser.fromMap(teamusermappingData);
+      print(teamrequests);
+      return teamrequests;
+
+      List<dynamic> userrequestsData = json.decode(response.body);
+      //print(userdetailsData);
+      List<UserRequest> userrequests = userrequestsData.map((userrequestsData) => UserRequest.fromMap(userrequestsData)).toList();
+
+
+    } else {
+      throw Exception('Failed to get data');
+    }
   }
 
 }

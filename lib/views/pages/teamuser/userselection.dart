@@ -16,37 +16,16 @@ class UserSelection extends StatefulWidget {
 class _UserSelectionState extends State<UserSelection> {
   final _formKey = GlobalKey<FormState>();
   final IKirthanRestApi apiSvc = new RestAPIServices();
-  List<UserRequest> users;
-  List<UserRequest> selectedUsers;
+  Future<List<UserRequest>> users;
+  List<UserRequest> selectedUsers ;
   bool sort;
-
-  void getUsers() async{
-    users = await apiSvc?.getUserRequests("SA");
-    print("Users");
-    print(users);
-  }
 
   @override
   void initState() {
     sort = false;
     selectedUsers = [];
-
-    //apiSvc?.getUserRequests("SA").whenComplete(action)
-    
-    getUsers();
-    //users = UserRequest.getUsers();
-
+    users = apiSvc?.getUserRequests("SA");
     super.initState();
-  }
-
-  onSortColum(int columnIndex, bool ascending) {
-    if (columnIndex == 0) {
-      if (ascending) {
-        users.sort((a, b) => a.firstName.compareTo(b.firstName));
-      } else {
-        users.sort((a, b) => b.firstName.compareTo(a.firstName));
-      }
-    }
   }
 
   onSelectedRow(bool selected, UserRequest user) async {
@@ -59,7 +38,7 @@ class _UserSelectionState extends State<UserSelection> {
     });
   }
 
-  deleteSelected() async {
+  /*deleteSelected() async {
     setState(() {
       if (selectedUsers.isNotEmpty) {
         List<UserRequest> temp = [];
@@ -70,58 +49,75 @@ class _UserSelectionState extends State<UserSelection> {
         }
       }
     });
-  }
+  }*/
 
   SingleChildScrollView dataBody() {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      child: DataTable(
-        sortAscending: sort,
-        sortColumnIndex: 0,
-        columns: [
-          DataColumn(
-              label: Text("FirstName"),
-              numeric: false,
-              onSort: (columnIndex, ascending) {
-                setState(() {
-                  sort = !sort;
-                });
-                onSortColum(columnIndex, ascending);
-              }),
-          DataColumn(
-            label: Text("LastName"),
-            numeric: false,
-          ),
-          DataColumn(
-            label: Text("UserName"),
-            numeric: false,
-          ),
-        ],
-        rows: users
-            .map(
-              (user) => DataRow(
-                  selected: selectedUsers.contains(user),
-                  onSelectChanged: (b) {
-                    print("OnSelect");
-                    onSelectedRow(b, user);
-                  },
-                  cells: [
-                    DataCell(
-                      Text(user.firstName),
-                      /*onTap: () {
-                        print('Selected ${user.firstName}');
-                      },*/
-                    ),
-                    DataCell(
-                      Text(user.lastName),
-                    ),
-                    DataCell(
-                      Text(user.userName),
-                    ),
-                  ]),
-            )
-            .toList(),
-      ),
+      child: FutureBuilder<List<UserRequest>>(
+          future: users,
+          builder: (BuildContext context,
+              AsyncSnapshot<List<UserRequest>> snapshot) {
+            if (snapshot.hasData) {
+              return DataTable(
+                sortAscending: sort,
+                sortColumnIndex: 0,
+                columns: [
+                  DataColumn(
+                      label: Text("FirstName"),
+                      numeric: false,
+                      onSort: (columnIndex, ascending) {
+                        setState(() {
+                          sort = !sort;
+                          if (ascending) {
+                            snapshot.data.sort((a,b) => a.firstName.compareTo(b.firstName));
+                          } else {
+                            snapshot.data.sort((a,b) => b.firstName.compareTo(a.firstName));
+                          }
+
+                        });
+                        //onSortColum(columnIndex, ascending);
+                      }
+                      ),
+                  DataColumn(
+                    label: Text("LastName"),
+                    numeric: false,
+                  ),
+                  DataColumn(
+                    label: Text("UserName"),
+                    numeric: false,
+                  ),
+                ],
+                rows: snapshot.data
+                    .map(
+                      (user) => DataRow(
+                          selected: selectedUsers.contains(user),
+                          onSelectChanged: (b) {
+                            onSelectedRow(b, user);
+                          },
+                          cells: [
+                            DataCell(
+                              Text(user.firstName),
+                              onTap: () {
+                                print('Selected ${user.firstName}');
+                              },
+                            ),
+                            DataCell(
+                              Text(user.lastName),
+                            ),
+                            DataCell(
+                              Text(user.userName),
+                            ),
+                          ]),
+                    )
+                    .toList(),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
     );
   }
 
@@ -166,7 +162,7 @@ class _UserSelectionState extends State<UserSelection> {
                   onPressed: selectedUsers.isEmpty
                       ? null
                       : () {
-                          deleteSelected();
+                          //deleteSelected();
                         },
                 ),
               ),

@@ -17,7 +17,7 @@ class TeamWrite extends StatefulWidget {
 class _TeamWriteState extends State<TeamWrite> {
 
   final _formKey = GlobalKey<FormState>();
-  team teamrequest = new team();
+  TeamRequest teamrequest = new TeamRequest();
   final IKirthanRestApi apiSvc = new RestAPIServices();
 
 
@@ -120,7 +120,7 @@ class _TeamWriteState extends State<TeamWrite> {
                                 teamrequest.approvalComments = "AAA";
                                 Map<String, dynamic> teammap = teamrequest
                                     .toJson();
-                                team newteamrequest = await apiSvc
+                                TeamRequest newteamrequest = await apiSvc
                                     ?.submitNewTeamRequest(teammap);
                                 print(newteamrequest.id);
                                 String tid = newteamrequest.id.toString();

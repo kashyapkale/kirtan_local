@@ -6,6 +6,7 @@ import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_kirthan/views/pages/user/user_maintenance.dart';
 import 'package:flutter_kirthan/views/pages/teamuser/userselection.dart';
+import 'package:flutter_kirthan/views/pages/teamuser/teamuserview.dart';
 
 class UsersPanel extends StatelessWidget {
   String userType;
@@ -42,12 +43,14 @@ class UsersPanel extends StatelessWidget {
                           RaisedButton(
                             child: const Text("Admin"),
                             onPressed: () {
-                              print("Admin");
-                              model.setUserRequests("A");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TeamUserView()));
                             },
                           ),
                           RaisedButton(
-                            child: const Text("User"),
+                            child: const Text("Team-User Add"),
                             onPressed: () {
                               Navigator.push(
                                   context,

@@ -1,5 +1,5 @@
 
-class team {
+class TeamRequest {
   final int id;
   String teamTitle;
   String teamDescription;
@@ -13,7 +13,7 @@ class team {
 
 
 //Typically called form service layer to create a new user
-  team({this.id, this.teamTitle, this.teamDescription, this.isProcessed,
+  TeamRequest({this.id, this.teamTitle, this.teamDescription, this.isProcessed,
     this.createdBy,
     this.updatedBy,
     this.createTime,
@@ -22,8 +22,8 @@ class team {
     this.approvalComments });
 
 //Typically called from the data_source layer after getting data from an external source.
-  factory team.fromJson(Map<String, dynamic> data) {
-    return team(
+  factory TeamRequest.fromJson(Map<String, dynamic> data) {
+    return TeamRequest(
       id: data['id'],
       teamTitle: data['teamTitle'],
       teamDescription: data['teamDescription'],
@@ -37,8 +37,8 @@ class team {
     );
   }
 
-  factory team.fromMap(Map<String, dynamic> map) {
-    return team(
+  factory TeamRequest.fromMap(Map<String, dynamic> map) {
+    return TeamRequest(
       id: map['id'],
       teamTitle: map['teamTitle'],
       teamDescription: map['teamDescription'],
