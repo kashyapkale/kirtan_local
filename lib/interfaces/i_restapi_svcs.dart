@@ -35,7 +35,7 @@ abstract class IKirthanRestApi {
 
 
   //TeamUserMapping
-  //Future<List<TeamRequest>> getTeamRequests(String teamTitle);
+  Future<List<TeamUser>> getTeamUserMappings(String teamMapping);
   Future<List<TeamUser>> submitNewTeamUserMapping(List<TeamUser> listofteamusermap);
   //Future<void> submitUpdateTeamRequest(String teamrequestmap);
   //Future<bool> processTeamRequest(Map<String,dynamic> processrequestmap);

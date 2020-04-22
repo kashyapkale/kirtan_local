@@ -401,5 +401,27 @@ class RestAPIServices implements IKirthanRestApi {
     }
   }
 
+  Future<List<TeamUser>> getTeamUserMappings(String teamMapping) async {
+    String requestBody = '{"createdBy":"SYSTEM"}';
+
+    print(requestBody);
+
+    var response = await _client.put('$_baseUrl/getteamusermappings', headers: {"Content-Type": "application/json"}, body: requestBody);
+
+    if (response.statusCode == 200) {
+      //print(response.body);
+      List<dynamic> teamtsermappingData = json.decode(response.body);
+      print(teamtsermappingData);
+      List<TeamUser> teamusermappings = teamtsermappingData.map((teamtsermappingData) => TeamUser.fromMap(teamtsermappingData)).toList();
+      print(teamusermappings);
+      //print(userdetails);
+
+      return teamusermappings;
+
+    } else {
+      throw Exception('Failed to get data');
+    }
+  }
+
 }
 
