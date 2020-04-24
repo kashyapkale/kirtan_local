@@ -411,9 +411,9 @@ class RestAPIServices implements IKirthanRestApi {
     if (response.statusCode == 200) {
       //print(response.body);
       List<dynamic> teamtsermappingData = json.decode(response.body);
-      print(teamtsermappingData);
+     // print(teamtsermappingData);
       List<TeamUser> teamusermappings = teamtsermappingData.map((teamtsermappingData) => TeamUser.fromMap(teamtsermappingData)).toList();
-      print(teamusermappings);
+      //print(teamusermappings);
       //print(userdetails);
 
       return teamusermappings;
