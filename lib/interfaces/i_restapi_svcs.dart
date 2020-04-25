@@ -37,9 +37,9 @@ abstract class IKirthanRestApi {
   //TeamUserMapping
   Future<List<TeamUser>> getTeamUserMappings(String teamMapping);
   Future<List<TeamUser>> submitNewTeamUserMapping(List<TeamUser> listofteamusermap);
+  Future<List<TeamUser>> submitDeleteTeamUserMapping(List<TeamUser> listofteamusermap);
   //Future<void> submitUpdateTeamRequest(String teamrequestmap);
   //Future<bool> processTeamRequest(Map<String,dynamic> processrequestmap);
-  //Future<bool> deleteTeamRequest(Map<String,dynamic> processrequestmap);
 
   //EventUserMapping
   Future<List<EventUser>> getEventTeamUserMappings(String eventMapping);
@@ -47,6 +47,5 @@ abstract class IKirthanRestApi {
   Future<List<EventUser>> submitDeleteEventTeamUserMapping(List<EventUser> listofeventsermap);
 //Future<void> submitUpdateTeamRequest(String teamrequestmap);
 //Future<bool> processTeamRequest(Map<String,dynamic> processrequestmap);
-//Future<bool> deleteTeamRequest(Map<String,dynamic> processrequestmap);
 
 }

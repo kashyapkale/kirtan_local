@@ -236,26 +236,6 @@ class _TeamUserViewState extends State<TeamUserView> {
                         MaterialPageRoute(
                             builder: (context) =>
                                 EventUserMapping(selectedTeamUsers: selectedTeamUsers)));
-
-
-                    /*List<TeamUser> listofTeamUsers = new List<TeamUser>();
-                    for (var user in selectedlistofteamusers) {
-                      TeamUser teamUser = new TeamUser();
-                      teamUser.userId = user.id;
-                      //print(user.id);
-                      teamUser.teamId = _selectedTeam.id;
-                      teamUser.createdBy = "SYSTEM";
-                      String dt = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
-                          .format(DateTime.now());
-                      teamUser.createTime = dt;
-                      teamUser.updatedBy = "SYSTEM";
-                      teamUser.updateTime = dt;
-                      listofTeamUsers.add(teamUser);
-                    }
-                    //Map<String,dynamic> teamusermap = teamUser.toJson();
-                    print(listofTeamUsers);
-                    apiSvc?.submitNewTeamUserMapping(listofTeamUsers);
-                    */
                   },
                 ),
               ),
@@ -264,6 +244,8 @@ class _TeamUserViewState extends State<TeamUserView> {
                 child: OutlineButton(
                   child: Text('DELETE SELECTED ${selectedTeamUsers.length}'),
                   onPressed: () {
+                    print(selectedTeamUsers);
+                    apiSvc?.submitDeleteTeamUserMapping(selectedTeamUsers);
                   },
                 ),
               ),

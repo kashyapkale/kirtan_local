@@ -423,6 +423,29 @@ class RestAPIServices implements IKirthanRestApi {
       throw Exception('Failed to get data');
     }
   }
+  Future<List<TeamUser>> submitDeleteTeamUserMapping(List<TeamUser> listofteamusermap) async {
+    print(listofteamusermap);
+    String requestBody = json.encode(listofteamusermap);
+    print(requestBody);
+
+    var response = await _client.put('$_baseUrl/submitdeleteteamusermapping', headers: {"Content-Type": "application/json"}, body: requestBody);
+
+    if (response.statusCode == 200) {
+      List<dynamic> teamusermappingData = json.decode(response.body);
+      List<TeamUser> teamusers = teamusermappingData.map((teamusermappingData) =>  TeamUser.fromMap(teamusermappingData)).toList();
+//      TeamUser.fromMap(teamusermappingData);
+      print(teamusers);
+      return teamusers;
+
+      List<dynamic> userrequestsData = json.decode(response.body);
+      //print(userdetailsData);
+      List<UserRequest> userrequests = userrequestsData.map((userrequestsData) => UserRequest.fromMap(userrequestsData)).toList();
+
+
+    } else {
+      throw Exception('Failed to get data');
+    }
+  }
 
   Future<List<EventUser>> submitNewEventTeamUserMapping(List<EventUser> listofeventusermap) async {
     print(listofeventusermap);
