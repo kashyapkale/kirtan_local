@@ -6,6 +6,8 @@ import 'package:flutter_kirthan/views/widgets/event/event_list_item.dart';
 import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_kirthan/views/pages/event/event_maintenance.dart';
+import 'package:flutter_kirthan/views/pages/eventuser/eventuserview.dart';
+import 'package:flutter_kirthan/views/pages/teamuser/teamuserview.dart';
 
 class EventsPanel extends StatelessWidget {
   String eventType;
@@ -34,22 +36,39 @@ class EventsPanel extends StatelessWidget {
                         children: <Widget>[
                           RaisedButton(
                             child: const Text("Today"),
-                            onPressed: () {print("Today"); model.setEventRequests("1");},
+                            onPressed: () {
+                              print("Today");
+                              model.setEventRequests("1");
+                            },
                           ),
                           RaisedButton(
-                            child: const Text("Tomorrow"),
-                            onPressed: null,
+                            child: const Text("Event-User Add"),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TeamUserView()));
+                            },
                           ),
                           RaisedButton(
-                            child: const Text("This Week"),
-                            onPressed: null,
+                            //child: const Text("This Week"),
+                            child: const Text("Event-User View"),
+                            onPressed: () {
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                          builder: (context) => EventUserView()));
+
+                            },
                           ),
                           Expanded(
-                            child:
-                            RaisedButton(
+                            child: RaisedButton(
                               child: const Text("Create an Event"),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => EventWrite()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EventWrite()));
                               },
                             ),
                           ),
@@ -57,8 +76,8 @@ class EventsPanel extends StatelessWidget {
                       ),
                       ListView.builder(
                         shrinkWrap: true,
-                        itemCount: eventRequests == null ? 0 : eventRequests
-                            .length,
+                        itemCount:
+                            eventRequests == null ? 0 : eventRequests.length,
                         itemBuilder: (_, int index) {
                           var eventrequest = eventRequests[index];
                           return EventRequestsListItem(
@@ -67,8 +86,7 @@ class EventsPanel extends StatelessWidget {
                       ),
                     ],
                   );
-                }
-                else if (snapshot.hasError) {
+                } else if (snapshot.hasError) {
                   return NoInternetConnection(
                     action: () async {
                       //await model.setSuperAdminUserRequests("SuperAdmin");

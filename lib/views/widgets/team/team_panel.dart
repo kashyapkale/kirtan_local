@@ -5,6 +5,9 @@ import 'package:flutter_kirthan/views/widgets/team/team_list_item.dart';
 import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_kirthan/views/pages/team/team_maintenance.dart';
+import 'package:flutter_kirthan/views/pages/teamuser/userselection.dart';
+import 'package:flutter_kirthan/views/pages/teamuser/teamuserview.dart';
+
 
 class TeamsPanel extends StatelessWidget {
   String teamType;
@@ -38,21 +41,27 @@ class TeamsPanel extends StatelessWidget {
                               model.setTeamRequests("AE");
                             },
                           ),
-                          /*
+
                           RaisedButton(
-                            child: const Text("Admin"),
+                            child: const Text("Team-User Add"),
                             onPressed: () {
-                              print("Admin");
-                              model.setUserRequests("A");
+                              print("Team-User Add");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UserSelection()));
                             },
                           ),
                           RaisedButton(
-                            child: const Text("User"),
+                            child: const Text("Team-User View"),
                             onPressed: () {
-                              print("Users");
-                              model.setUserRequests("U");
+                              print("Team-User View");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TeamUserView()));
                             },
-                          ),*/
+                          ),
                           Expanded(
                             child: RaisedButton(
                               child: const Text("Create a Team"),

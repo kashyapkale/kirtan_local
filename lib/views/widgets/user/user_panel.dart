@@ -43,19 +43,15 @@ class UsersPanel extends StatelessWidget {
                           RaisedButton(
                             child: const Text("Admin"),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TeamUserView()));
+                              print("Admin");
+                              model.setUserRequests("A");
                             },
                           ),
                           RaisedButton(
-                            child: const Text("Team-User Add"),
+                            child: const Text("Users"),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => UserSelection()));
+                              print("Users");
+                              model.setUserRequests("U");
                             },
                           ),
                           Expanded(

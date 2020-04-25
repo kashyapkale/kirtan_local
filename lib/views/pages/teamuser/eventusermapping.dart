@@ -176,7 +176,6 @@ class _EventUserMappingState extends State<EventUserMapping> {
                       for (var teamuser in selectedTeamUsers) {
                         EventUser eventUser = new EventUser();
                         eventUser.userId = teamuser.userId;
-                        //print(user.id);
                         eventUser.teamId = teamuser.teamId;
                         eventUser.eventId = _selectedEvent.id;
                         eventUser.createdBy = "SYSTEM";
@@ -189,7 +188,7 @@ class _EventUserMappingState extends State<EventUserMapping> {
                       }
                       //Map<String,dynamic> teamusermap = teamUser.toJson();
                       print(listofEventUsers);
-                      //apiSvc?.submitNewTeamUserMapping(listofEventUsers);
+                      apiSvc?.submitNewEventTeamUserMapping(listofEventUsers);
                     },
                   ),
                 ),
