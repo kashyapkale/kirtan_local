@@ -3,7 +3,7 @@ import 'package:flutter_kirthan/models/teamuser.dart';
 import 'package:flutter_kirthan/models/user.dart';
 import 'package:flutter_kirthan/models/event.dart';
 import 'package:flutter_kirthan/models/team.dart';
-import 'package:flutter_kirthan/models/eventuser.dart';
+
 
 abstract class IKirthanRestApi {
   //Sample
@@ -37,15 +37,7 @@ abstract class IKirthanRestApi {
   //TeamUserMapping
   Future<List<TeamUser>> getTeamUserMappings(String teamMapping);
   Future<List<TeamUser>> submitNewTeamUserMapping(List<TeamUser> listofteamusermap);
-  Future<List<TeamUser>> submitDeleteTeamUserMapping(List<TeamUser> listofteamusermap);
   //Future<void> submitUpdateTeamRequest(String teamrequestmap);
   //Future<bool> processTeamRequest(Map<String,dynamic> processrequestmap);
-
-  //EventUserMapping
-  Future<List<EventUser>> getEventTeamUserMappings(String eventMapping);
-  Future<List<EventUser>> submitNewEventTeamUserMapping(List<EventUser> listofeventsermap);
-  Future<List<EventUser>> submitDeleteEventTeamUserMapping(List<EventUser> listofeventsermap);
-//Future<void> submitUpdateTeamRequest(String teamrequestmap);
-//Future<bool> processTeamRequest(Map<String,dynamic> processrequestmap);
-
+  //Future<bool> deleteTeamRequest(Map<String,dynamic> processrequestmap);
 }

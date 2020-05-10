@@ -6,12 +6,12 @@ import 'package:flutter_kirthan/views/widgets/event/event_list_item.dart';
 import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_kirthan/views/pages/event/event_maintenance.dart';
-import 'package:flutter_kirthan/views/pages/eventuser/eventuserview.dart';
-import 'package:flutter_kirthan/views/pages/teamuser/teamuserview.dart';
+import 'package:flutter_kirthan/views/widgets/event/event_calendar.dart';
 
 class EventsPanel extends StatelessWidget {
   String eventType;
   EventsPanel({this.eventType});
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MainPageViewModel>(
@@ -27,66 +27,74 @@ class EventsPanel extends StatelessWidget {
               case ConnectionState.done:
                 if (snapshot.hasData) {
                   var eventRequests = snapshot.data;
-                  return new Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    //mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      new Row(
+                  return Scaffold(
+                      appBar: AppBar(
+                      backgroundColor: Colors.white,
+                      bottom: PreferredSize(
+                      preferredSize: Size(double.infinity, 10.0),
+                        child: Padding(
+                      padding: EdgeInsets.only(top: 5.0, bottom: 10.0),
+                        child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           RaisedButton(
                             child: const Text("Today"),
+                            onPressed: () {print("Today"); model.setEventRequests("1");},
+                          ),
+                          RaisedButton(
+                            child: const Text("Calendar View"),
                             onPressed: () {
-                              print("Today");
-                              model.setEventRequests("1");
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => CalendarPage()));
                             },
                           ),
                           RaisedButton(
-                            child: const Text("Event-User Add"),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TeamUserView()));
-                            },
+                            child: const Text("This Week"),
+                            onPressed: null,
                           ),
-                          RaisedButton(
-                            //child: const Text("This Week"),
-                            child: const Text("Event-User View"),
-                            onPressed: () {
-                          Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                          builder: (context) => EventUserView()));
-
-                            },
-                          ),
-                          Expanded(
-                            child: RaisedButton(
+                         /* Expanded(
+                            child:
+                            RaisedButton(
                               child: const Text("Create an Event"),
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => EventWrite()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => EventWrite()));
                               },
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
-                      ListView.builder(
+                        ),
+                      ),
+                      ),
+                      body:  new RefreshIndicator(
+                      child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount:
-                            eventRequests == null ? 0 : eventRequests.length,
+                        itemCount: eventRequests == null ? 0 : eventRequests
+                            .length,
                         itemBuilder: (_, int index) {
                           var eventrequest = eventRequests[index];
                           return EventRequestsListItem(
                               eventrequest: eventrequest);
                         },
                       ),
-                    ],
+                        onRefresh: () {
+                          model.setUserRequests("SA");
+                        },
+                      ),
+                    floatingActionButton: FloatingActionButton(
+                      child: const Text("+",
+                        style: TextStyle(
+                          fontSize:20,
+                        ),),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EventWrite()));
+                      },
+                    ),
                   );
-                } else if (snapshot.hasError) {
+                }
+                else if (snapshot.hasError) {
                   return NoInternetConnection(
                     action: () async {
                       //await model.setSuperAdminUserRequests("SuperAdmin");

@@ -82,7 +82,7 @@ class _EditProfileViewState extends State<EditProfileView> {
               padding: const EdgeInsets.fromLTRB(0.0, 10.0, 5.0, 10.0),
               child: new MaterialButton(
                 color: themeData.primaryColor,
-                textColor: themeData.secondaryHeaderColor,
+                //textColor: themeData.secondaryHeaderColor,
                 child: new Text('Save'),
                 onPressed: () {
                   // _handleSubmitted();

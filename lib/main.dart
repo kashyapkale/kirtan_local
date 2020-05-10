@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_kirthan/services/data_services.dart';
 import 'package:flutter_kirthan/view_models/main_page_view_model.dart';
 import 'package:flutter_kirthan/views/pages/main_page.dart';
+import 'package:flutter_kirthan/theme/theme_manager.dart';
+import 'package:provider/provider.dart';
+
 
 final MainPageViewModel mainPageVM = MainPageViewModel(apiSvc: RestAPIServices());
 //updated by anuj machine
@@ -14,15 +17,19 @@ class KirthanApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+        create: (_) => ThemeNotifier(),
+    child: Consumer<ThemeNotifier>(
+    builder: (context, ThemeNotifier notifier, child) {
+
     return new MaterialApp(
       title: 'Kirthan Application',
-      theme: new ThemeData(
-        primaryColor: Color(0xff070707),
-        primaryColorLight: Color(0xff0a0a0a),
-        primaryColorDark: Color(0xff000000),
-      ),
+    theme: notifier.darkTheme ? dark : light,
       home: MainPage(viewModel: mainPageVM),
       debugShowCheckedModeBanner: false,
+    );
+    } ,
+    ),
     );
   }
 }

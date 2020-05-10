@@ -531,4 +531,3 @@ class _EventWriteState extends State<EventWrite> {
   }
 
 }
-

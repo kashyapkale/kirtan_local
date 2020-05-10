@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kirthan/models/team.dart';
 import 'package:flutter_kirthan/view_models/main_page_view_model.dart';
-import 'package:flutter_kirthan/views/widgets/team/team_list_item.dart';
-import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter_kirthan/views/pages/team/team_maintenance.dart';
-import 'package:flutter_kirthan/views/pages/teamuser/userselection.dart';
-import 'package:flutter_kirthan/views/pages/teamuser/teamuserview.dart';
-
+import 'package:flutter_kirthan/views/widgets/no_internet_connection.dart';
+import 'package:flutter_kirthan/views/widgets/team/team_list_item.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class TeamsPanel extends StatelessWidget {
   String teamType;
   TeamsPanel({this.teamType});
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MainPageViewModel>(
       builder: (context, child, model) {
         return FutureBuilder<List<TeamRequest>>(
           future: model.teamrequests,
+          // ignore: missing_return
           builder: (_, AsyncSnapshot<List<TeamRequest>> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -27,65 +26,81 @@ class TeamsPanel extends StatelessWidget {
               case ConnectionState.done:
                 if (snapshot.hasData) {
                   var teamRequests = snapshot.data;
-                  return new Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    //mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          RaisedButton(
-                            child: const Text("All Teams"),
-                            onPressed: () {
-                              print("All Teams");
-                              model.setTeamRequests("AE");
-                            },
-                          ),
-
-                          RaisedButton(
-                            child: const Text("Team-User Add"),
-                            onPressed: () {
-                              print("Team-User Add");
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => UserSelection()));
-                            },
-                          ),
-                          RaisedButton(
-                            child: const Text("Team-User View"),
-                            onPressed: () {
-                              print("Team-User View");
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TeamUserView()));
-                            },
-                          ),
-                          Expanded(
-                            child: RaisedButton(
-                              child: const Text("Create a Team"),
+                  return Scaffold(
+                      appBar: AppBar(
+                      backgroundColor: Colors.white,
+                        bottom: PreferredSize(
+                        preferredSize: Size(double.infinity, 10.0),
+                          child: Padding(
+                          padding: EdgeInsets.only(top: 5.0, bottom: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                              RaisedButton(
+                              child: const Text("All Teams"),
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            TeamWrite()));
+                                print("All Teams");
+                                model.setTeamRequests("AE");
                               },
                             ),
+                            /*
+                            RaisedButton(
+                              child: const Text("Admin"),
+                              onPressed: () {
+                                print("Admin");
+                                model.setUserRequests("A");
+                              },
+                            ),
+                            RaisedButton(
+                              child: const Text("User"),
+                              onPressed: () {
+                                print("Users");
+                                model.setUserRequests("U");
+                              },
+                            ),*/
+                            /*Expanded(
+                              child: RaisedButton(
+                                child: const Text("Create a Team"),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => TeamWrite()));
+                                },
+                              ),
+                            ),*/
+                          ],
+                        ),
                           ),
-                        ],
+                        ),
                       ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount:
-                        teamRequests == null ? 0 : teamRequests.length,
-                        itemBuilder: (_, int index) {
-                          var teamrequest = teamRequests[index];
-                          return TeamRequestsListItem(teamrequest: teamrequest);
-                        },
-                      ),
-                    ],
+                    body:  new RefreshIndicator(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount:
+                          teamRequests == null ? 0 : teamRequests.length,
+                          itemBuilder: (_, int index) {
+                            var teamrequest = teamRequests[index];
+                            return TeamRequestsListItem(
+                                teamrequest: teamrequest);
+                          },
+                        ),
+                      onRefresh: () {
+                        model.setTeamRequests("AE");
+                      },
+                    ),
+                    floatingActionButton: FloatingActionButton(
+                      child: const Text("+",
+                        style: TextStyle(
+                          fontSize:20,
+                        ),),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TeamWrite()));
+                      },
+                    ),
                   );
                 } else if (snapshot.hasError) {
                   return NoInternetConnection(
